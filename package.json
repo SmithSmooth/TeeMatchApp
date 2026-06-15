@@ -1,0 +1,29 @@
+{
+  "name": "teematchapp",
+  "version": "1.0.0",
+  "description": "This is a project that tries to solve the problem that new golfers or even upcoming golf players lack a community that they could regularly play with that are in the same area and similar skill level.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SmithSmooth/TeeMatchApp.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/SmithSmooth/TeeMatchApp/issues"
+  },
+  "homepage": "https://github.com/SmithSmooth/TeeMatchApp#readme",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "pg": "^8.21.0"
+  }
+}

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tee Match</title>
+
+    <link rel="stylesheet" href="/css/main.css">
+    <script src="/js/auth.js" defer></script>
+</head>
+<body>
+
+    <!-- HEADER -->
+
+    <header id="main-header">
+        <div id="logo-container">
+            <h1 id="app-title">Tee Match</h1>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+
+    <section id="hero-section">
+
+        <div id="hero-container">
+
+            <h2 id="hero-heading">
+                Find Golfers Near You
+            </h2>
+
+            <p id="hero-description">
+                Connect with golfers in your area, build friendships,
+                organise rounds and discover new playing partners.
+            </p>
+
+        </div>
+
+    </section>
+
+    <!-- AUTH SECTION -->
+
+    <section id="auth-section">
+
+        <div id="auth-card">
+
+            <!-- TOGGLE -->
+
+            <div id="toggle-buttons">
+
+                <button
+                    id="login-toggle-btn"
+                    class="toggle-btn active-toggle"
+                >
+                    Login
+                </button>
+
+                <button
+                    id="signup-toggle-btn"
+                    class="toggle-btn"
+                >
+                    Sign Up
+                </button>
+
+            </div>
+
+            <!-- ERROR MESSAGE -->
+
+            <div id="error-message-container" class="hidden-message">
+
+                <p id="error-message-text">
+                    Invalid email or password.
+                </p>
+
+            </div>
+
+            <!-- SUCCESS MESSAGE -->
+
+            <div id="success-message-container" class="hidden-message">
+
+                <p id="success-message-text">
+                    Account created successfully.
+                </p>
+
+            </div>
+
+            <!-- LOGIN FORM -->
+
+            <form id="login-form">
+
+                <input
+                    type="email"
+                    id="login-email"
+                    class="form-input"
+                    placeholder="Email Address"
+                    required
+                >
+
+                <input
+                    type="password"
+                    id="login-password"
+                    class="form-input"
+                    placeholder="Password"
+                    required
+                >
+
+                <div id="forgot-password-container">
+
+                    <a href="#" id="forgot-password-link">
+                        Forgot Password?
+                    </a>
+
+                </div>
+
+                <button
+                    type="submit"
+                    id="login-button"
+                    class="submit-button"
+                >
+                    Login
+                </button>
+
+            </form>
+
+            <!-- SIGNUP FORM -->
+
+            <form id="signup-form" class="hidden-form">
+
+                <input
+                    type="text"
+                    id="signup-name"
+                    class="form-input"
+                    placeholder="Full Name"
+                    required
+                >
+
+                <input
+                    type="email"
+                    id="signup-email"
+                    class="form-input"
+                    placeholder="Email Address"
+                    required
+                >
+
+                <input
+                    type="password"
+                    id="signup-password"
+                    class="form-input"
+                    placeholder="Create Password"
+                    required
+                >
+
+                <input
+                    type="password"
+                    id="confirm-password"
+                    class="form-input"
+                    placeholder="Confirm Password"
+                    required
+                >
+
+                <button
+                    type="submit"
+                    id="signup-button"
+                    class="submit-button"
+                >
+                    Create Account
+                </button>
+
+            </form>
+
+        </div>
+
+    </section>
+
+</body>
+</html>

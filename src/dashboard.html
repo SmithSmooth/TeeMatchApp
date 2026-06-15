@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tee Match Dashboard</title>
+    <link rel="stylesheet" href="/css/dashboard.css">
+</head>
+    <script src="/js/dashboard.js" defer></script>
+</head>
+<body>
+    <!-- HEADER -->
+
+    <header id="main-header">
+
+        <h1 id="app-title">Tee Match</h1>
+
+    </header>
+
+    
+
+    <!-- WELCOME BANNER -->
+
+    <section id="welcome-banner">
+    <div id="welcome-top">
+        <h2 id="welcome-message">
+            Welcome Back, <span id="user-name">Golfer</span>
+        </h2>
+
+        <p id="welcome-subtext">
+            Ready to find your next round?
+        </p>
+        <button id="logout-btn">Logout</button>
+        </div>
+
+    </section>
+
+    <!-- QUICK ACTIONS -->
+
+    <section id="quick-actions">
+
+        <h3 class="section-heading">
+            Quick Actions
+        </h3>
+
+        <div class="action-grid">
+
+            <button
+                id="browse-rounds-btn"
+                class="action-card">
+
+                ⛳
+
+                <span>
+                    Browse Rounds
+                </span>
+
+            </button>
+
+            <button
+                id="create-round-btn"
+                class="action-card">
+                ➕
+                <span>
+                    Create Round
+                </span>
+
+            </button>
+
+            <button
+                id="my-rounds-btn"
+                class="action-card">
+                📅
+                <span>
+                    My Rounds
+                </span>
+
+            </button>
+
+            <button
+                id="requests-btn"
+                class="action-card">
+
+                👥
+
+                <span>
+                    Requests
+                </span>
+
+            </button>
+
+        </div>
+
+    </section>
+
+    <!-- PROFILE SECTION -->
+
+    <section id="profile-section">
+
+        <h3 class="section-heading">
+            My Profile
+        </h3>
+
+        <div class="profile-card">
+
+            <!-- CONTACT DETAILS -->
+
+            <h4 class="profile-subheading">
+                Contact Details
+            </h4>
+
+            <label for="phone-number">
+                Phone Number
+            </label>
+
+            <input
+                type="tel"
+                id="phone-number"
+                class="form-input">
+
+            <label for="instagram-handle">
+                Instagram Handle
+            </label>
+
+            <input
+                type="text"
+                id="instagram-handle"
+                class="form-input">
+
+            <label for="postcode">
+                Postcode
+            </label>
+
+            <input
+                type="text"
+                id="postcode"
+                class="form-input">
+
+            <!-- GOLF DETAILS -->
+
+            <h4 class="profile-subheading">
+                Golf Information
+            </h4>
+
+            <label for="home-course">
+                Home Course
+            </label>
+
+            <input
+                type="text"
+                id="home-course"
+                class="form-input">
+
+            <label for="handicap">
+                Handicap
+            </label>
+
+            <input
+                type="number"
+                id="handicap"
+                class="form-input"
+                step="0.1">
+
+            <label for="skill-level">
+                Skill Level
+            </label>
+
+            <select
+                id="skill-level"
+                class="form-input">
+
+                <option value="">
+                    Select Skill Level
+                </option>
+
+                <option value="Beginner">
+                    Beginner
+                </option>
+
+                <option value="Intermediate">
+                    Intermediate
+                </option>
+
+                <option value="Advanced">
+                    Advanced
+                </option>
+
+            </select>
+
+            <label for="availability">
+                Availability
+            </label>
+
+            <select
+                id="availability"
+                class="form-input">
+
+                <option value="">
+                    Select Availability
+                </option>
+
+                <option value="Weekdays">
+                    Weekdays
+                </option>
+
+                <option value="Weekends">
+                    Weekends
+                </option>
+
+                <option value="Both">
+                    Both
+                </option>
+
+            </select>
+
+            <!-- BIO -->
+
+            <h4 class="profile-subheading">
+                About Me
+            </h4>
+
+            <textarea
+                id="bio"
+                class="form-textarea"
+                placeholder="Tell other golfers a little about yourself..."></textarea>
+
+            <div id="profile-message"></div>
+            <button
+                id="save-profile-btn"
+                class="save-button">
+
+                Save Changes
+
+            </button>
+
+        </div>
+
+    </section>
+
+    <!-- MOBILE NAVIGATION -->
+
+    <nav id="mobile-nav">
+
+        <button
+            class="nav-btn"
+            id="nav-home">
+
+            🏠
+
+        </button>
+
+        <button
+            class="nav-btn"
+            id="nav-browse">
+
+            ⛳
+
+        </button>
+
+        <button
+            class="nav-btn"
+            id="nav-create">
+
+            ➕
+
+        </button>
+
+        <button
+            class="nav-btn"
+            id="nav-rounds">
+
+            📅
+
+        </button>
+
+        <button
+            class="nav-btn"
+            id="nav-profile">
+
+            👤
+
+        </button>
+
+    </nav>
+
+    
+    
+</body>
+</html>

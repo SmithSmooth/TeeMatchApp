@@ -1,0 +1,212 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    background:#bddeff; /*#f7fbff*/
+    min-height:100vh;
+    color:#1e293b;
+}
+
+/* HEADER */
+
+#main-header{
+    width:100%;
+    padding:25px;
+    text-align:center;
+}
+
+#app-title{
+    color:#5ba8ff;
+    font-size:3rem;
+    font-weight:700;
+}
+
+/* HERO */
+
+#hero-section{
+    display:flex;
+    justify-content:center;
+    margin-top:20px;
+}
+
+#hero-container{
+    width:90%;
+    max-width:900px;
+    background:white;
+    border-radius:20px;
+    padding:40px;
+    text-align:center;
+
+    box-shadow:
+    0 10px 30px rgba(0,0,0,0.08);
+}
+
+#hero-heading{
+    font-size:2rem;
+    margin-bottom:15px;
+}
+
+#hero-description{
+    font-size:1.1rem;
+    line-height:1.7;
+    color:#64748b;
+}
+
+/* AUTH */
+
+#auth-section{
+    display:flex;
+    justify-content:center;
+    margin-top:40px;
+    padding-bottom:50px;
+}
+
+#auth-card{
+    width:90%;
+    max-width:500px;
+
+    background:white;
+
+    border-radius:25px;
+
+    padding:35px;
+
+    box-shadow:
+    0 10px 30px rgba(0,0,0,0.08);
+}
+
+/* TOGGLE */
+
+#toggle-buttons{
+    display:flex;
+    margin-bottom:25px;
+}
+
+.toggle-btn{
+    flex:1;
+
+    padding:14px;
+
+    border:none;
+
+    cursor:pointer;
+
+    background:#e2e8f0;
+
+    font-weight:600;
+
+    transition:.3s;
+}
+
+.active-toggle{
+    background:#7ec8ff;
+    color:white;
+}
+
+/* FORM */
+
+.form-input{
+    width:100%;
+
+    padding:15px;
+
+    margin-bottom:15px;
+
+    border:1px solid #dbe4ee;
+
+    border-radius:12px;
+
+    font-size:1rem;
+}
+
+.form-input:focus{
+    outline:none;
+    border-color:#7ec8ff;
+}
+
+.submit-button{
+    width:100%;
+
+    padding:15px;
+
+    background:#7ec8ff;
+
+    color:white;
+
+    border:none;
+
+    border-radius:12px;
+
+    font-size:1rem;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+.submit-button:hover{
+    transform:translateY(-2px);
+}
+
+/* FORGOT PASSWORD */
+
+#forgot-password-container{
+    text-align:right;
+    margin-bottom:20px;
+}
+
+#forgot-password-link{
+    text-decoration:none;
+    color:#5ba8ff;
+    font-size:.95rem;
+}
+
+/* ERROR */
+
+#error-message-container{
+    background:#ffe5e5;
+    color:#c0392b;
+    padding:12px;
+    border-radius:10px;
+    margin-bottom:15px;
+}
+
+#success-message-container{
+    background:#e7ffe7;
+    color:#27ae60;
+    padding:12px;
+    border-radius:10px;
+    margin-bottom:15px;
+}
+
+.hidden-message{
+    display:none;
+}
+
+.hidden-form{
+    display:none;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+    #app-title{
+        font-size:2.2rem;
+    }
+
+    #hero-container{
+        padding:25px;
+    }
+
+    #auth-card{
+        padding:25px;
+    }
+
+}
