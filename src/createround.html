@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Create Round | TeeMatch</title>
+
+    <link
+        rel="stylesheet"
+        href="/css/createRounds.css">
+
+    <script src="/js/createRounds.js" defer></script>
+
+</head>
+
+<body>
+
+<header id="main-header">
+
+    <h1 id="app-title">
+
+        Tee Match
+
+    </h1>
+
+</header>
+
+
+<main id="create-round-container">
+
+    <section class="page-banner">
+
+        <h2>Create A Round</h2>
+
+        <p>
+            Find golfers to join your next round.
+        </p>
+
+    </section>
+    
+    <div id="round-message"></div>
+
+    <form id="create-round-form">
+
+        <div class="form-group">
+
+            <label for="course-name">
+
+                Golf Course
+
+            </label>
+
+            <input
+                type="text"
+                id="course-name"
+                placeholder="e.g. The Grove">
+
+        </div>
+
+        <div class="form-group">
+
+            <label for="round-date">
+
+                Date
+
+            </label>
+
+            <input
+                type="date"
+                id="round-date">
+
+        </div>
+
+        <div class="form-group">
+
+            <label for="tee-time">
+
+                Tee Time
+
+            </label>
+
+            <input
+                type="time"
+                id="tee-time">
+
+        </div>
+
+        <div class="form-group">
+
+            <label for="players-needed">
+
+                Players Needed
+
+            </label>
+
+            <select id="players-needed">
+
+                <option value="1">1 Player</option>
+
+                <option value="2">2 Players</option>
+
+                <option value="3">3 Players</option>
+
+            </select>
+
+        </div>
+
+        <div class="form-group">
+
+            <label for="round-notes">
+
+                Notes
+
+            </label>
+
+            <textarea
+
+                id="round-notes"
+
+                rows="5"
+
+                placeholder="Friendly round, all handicaps welcome">
+
+            </textarea>
+
+        </div>
+
+        <button
+            type="submit"
+            id="create-round-btn">
+
+            Create Round
+
+        </button>
+
+    </form>
+    
+
+</main>
+
+
+<nav id="bottom-nav">
+
+    <a href="dashboard.html" class="nav-item">
+
+        🏠
+        <span>Home</span>
+
+    </a>
+
+    <a href="browseRounds.html" class="nav-item">
+
+        ⛳
+        <span>Browse</span>
+
+    </a>
+
+
+</nav>
+
+</body>
+
+</html>

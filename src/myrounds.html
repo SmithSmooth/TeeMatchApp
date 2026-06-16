@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>My Rounds</title>
+
+    <link rel="stylesheet" href="/css/myrounds.css">
+
+</head>
+
+<body>
+
+<header>
+
+    <h1>Tee Match</h1>
+
+</header>
+
+<main id="my-rounds-container">
+
+    <section class="page-banner">
+        <h2>My Rounds</h2>
+        <p> Manage your upcoming rounds.</p>
+    </section>
+
+    <div id="round-message"></div>
+
+    <section>
+        <h3 class="section-title">Rounds I've Created</h3>
+        <div id="created-rounds"></div>
+    </section>
+
+</main>
+
+<div id="edit-modal">
+
+    <div id="edit-content">
+
+        <h3>Edit Round</h3>
+
+        <input type="text" id="edit-course">
+        <input type="date" id="edit-date">
+        <input type="time" id="edit-time">
+
+        <select id="edit-players">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+        </select>
+
+        <textarea id="edit-notes"></textarea>
+
+        <button id="save-round-btn">Save Changes </button>
+
+        <button id="cancel-edit-btn"> Cancel</button>
+
+    </div>
+
+</div>
+
+<nav id="bottom-nav">
+
+    <a href="dashboard.html">🏠</a>
+
+    <a href="browserounds.html">⛳</a>
+
+    <a href="createround.html">➕</a>
+
+</nav>
+
+<script src="/js/myrounds.js"></script>
+
+</body>
+
+</html>

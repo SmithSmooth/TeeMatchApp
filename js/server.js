@@ -4,6 +4,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const cors = require("cors");
 const db = require("C:/Users/smith/TeeMatchApp/database/db.js");
+const { v4: uuidv4 } = require("uuid");
 
 
 const app = express();
@@ -18,7 +19,7 @@ app.use(cors({
 function authenticateUser(req, res, next) {
 
     const authHeader = req.headers.authorization;
-    
+
 
     if (!authHeader) {
 
@@ -210,13 +211,13 @@ app.post("/signup", async (req, res) => {
 
             );
 
-        const result =await db.query( `INSERT INTO users(full_name,email,password_hash) VALUES($1,$2,$3) RETURNING id` [name,email,hashedPassword]);
+        const result = await db.query(`INSERT INTO users(full_name,email,password_hash) VALUES($1,$2,$3) RETURNING id`[name, email, hashedPassword]);
 
-        const userId =result.rows[0].id;
+        const userId = result.rows[0].id;
 
-        await db.query(`INSERT INTO profiles(user_id) VALUES($1) `,[userId]);
+        await db.query(`INSERT INTO profiles(user_id) VALUES($1) `, [userId]);
 
-        const token =jwt.sign({userId},process.env.JWT_SECRET,{expiresIn: "7d"});
+        const token = jwt.sign({ userId }, process.env.JWT_SECRET, { expiresIn: "7d" });
 
         res.status(201).json({
             success: true,
@@ -241,14 +242,14 @@ app.get("/dashboard", authenticateUser, async (req, res) => {
     try {
         const userId = req.user.userId;
 
-        const profile = await db.query( `SELECT users.full_name, profiles.phone_number,profiles.instagram_handle,profiles.postcode,
+        const profile = await db.query(`SELECT users.full_name, profiles.phone_number,profiles.instagram_handle,profiles.postcode,
         profiles.home_course,profiles.handicap,profiles.skill_level,profiles.availability,
         profiles.bio FROM users JOIN profiles ON users.id = profiles.user_id WHERE users.id = $1`, [userId]);
-        
+
         res.json(profile.rows[0]);
     } catch (error) {
 
-        console.error("Dashboard Route Error:",error);
+        console.error("Dashboard Route Error:", error);
 
 
         res.status(500).json({
@@ -261,7 +262,7 @@ app.get("/dashboard", authenticateUser, async (req, res) => {
 app.put("/profile", authenticateUser, async (req, res) => {
     try {
         const userId = req.user.userId;
-        const { phone_number, instagram_handle, postcode, home_course, handicap, skill_level, availability, bio } = req.body;
+        const { phoneNumber, instagramHandle, postcode, homeCourse, handicap, skillLevel, availability, bio } = req.body;
 
         await db.query(
             `
@@ -269,12 +270,12 @@ app.put("/profile", authenticateUser, async (req, res) => {
             SET phone_number = $1, instagram_handle = $2, postcode = $3, home_course = $4, handicap = $5, skill_level = $6, availability = $7, bio = $8
             WHERE user_id = $9
             `,
-            [phone_number, instagram_handle, postcode, home_course, handicap, skill_level, availability, bio, userId]
+            [phoneNumber, instagramHandle, postcode, homeCourse, handicap, skillLevel, availability, bio, userId]
         );
 
         res.json({ success: true, message: "Profile updated successfully" });
     } catch (error) {
-        console.error("Profile Update Error:", error); 
+        console.error("Profile Update Error:", error);
 
         res.status(500).json({
             success: false,
@@ -282,6 +283,141 @@ app.put("/profile", authenticateUser, async (req, res) => {
         });
     }
 });
+
+app.post("/rounds", authenticateUser, async (req, res) => {
+    try {
+        const creatorId = req.user.userId;
+        const { courseName, roundDate, teeTime, playersNeeded, notes } = req.body;
+        const today = new Date();
+
+        today.setHours(0, 0, 0, 0);
+
+        const selectedDate = new Date(roundDate);
+
+        if (selectedDate < today) {
+            return res.status(400).json({
+                success: false,
+                message: "Round date cannot be in the past."
+            });
+        }
+
+        const hour = parseInt(teeTime.split(":")[0]);
+        if (hour < 6 || hour > 18) {
+            return res.status(400).json({
+                success: false,
+                message: "Tee time must be between 06:00 and 18:59."
+            });
+        }
+
+        const now = new Date();
+
+        const isToday = selectedDate.toDateString() === now.toDateString();
+
+        if (isToday) {
+            const currentHour = now.getHours();
+            const selectedHour = parseInt(teeTime.split(":")[0]);
+            if (selectedHour <= currentHour) {
+                return {
+                    valid: false,
+                    message: "Please select a future tee time."
+                };
+            }
+        }
+
+        const roundId = uuidv4();
+
+        await db.query(`INSERT INTO rounds(
+                id,creator_id,course_name,round_date,tee_time,players_needed,notes) VALUES( $1,$2,$3,$4,$5,$6,$7 )`,
+            [roundId, creatorId, courseName, roundDate, teeTime, playersNeeded, notes || null]);
+
+        res.status(201).json({
+            success: true,
+            message: "Round created successfully."
+        });
+
+    }
+    catch (error) {
+        console.error(error);
+
+        res.status(500).json({
+            success: false, message: "Error creating round."
+        });
+    }
+});
+
+app.get("/my-rounds", authenticateUser, async (req, res) => {
+
+    try {
+        const userId = req.user.userId;
+        const rounds = await db.query(`SELECT * FROM rounds WHERE creator_id = $1 ORDER BY round_date ASC `, [userId]);
+
+        res.json(rounds.rows);
+
+    }
+    catch (error) {
+        console.error(error);
+
+        res.status(500).json({ success: false, message: "Error fetching rounds." });
+    }
+
+});
+
+app.delete("/rounds/:id", authenticateUser, async (req, res) => {
+
+    try {
+        const userId = req.user.userId;
+        const roundId = req.params.id;
+        await db.query(
+            `DELETE FROM rounds WHERE id = $1 AND creator_id = $2 `,
+            [roundId, userId]
+        );
+
+        res.json({
+            success: true,
+            message: "Round deleted."
+        });
+    }
+    catch (error) {
+        console.error(error);
+
+        res.status(500).json({
+            success: false
+        });
+    }
+});
+
+app.put("/rounds/:id", authenticateUser, async (req, res) => {
+
+    try {
+
+        const roundId = req.params.id;
+        const userId = req.user.userId;
+        const { courseName, roundDate, teeTime, playersNeeded, notes } = req.body;
+
+        const result = await db.query(`UPDATE rounds SET course_name = $1, round_date = $2,
+                tee_time = $3,players_needed = $4,notes = $5 WHERE id = $6 AND creator_id = $7 RETURNING * `,
+            [courseName, roundDate, teeTime, playersNeeded, notes, roundId, userId]);
+
+        if (result.rowCount === 0) {
+            return res.status(404).json({
+                success: false,
+                message: "Round not found"
+            });
+        }
+        res.json({
+            success: true,
+            message: "Round updated"
+        });
+    }
+    catch (error) {
+        console.error(error);
+        res.status(500).json({
+            success: false,
+            message: "Error updating round"
+        });
+    }
+}
+);
 
 app.listen(3000, () => {
     console.log("Server running");

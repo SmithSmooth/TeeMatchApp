@@ -5,6 +5,33 @@ if (!token) {
 
 document.getElementById("logout-btn").addEventListener("click",logout);
 
+const homeButton = document.getElementById("nav-home");
+
+homeButton.addEventListener("click", () => {
+    window.location.href = "http://127.0.0.1:5500/src/dashboard.html"
+});
+
+const createRoundButton = document.getElementById("nav-create");
+const createRoundButton2 = document.getElementById("create-round-btn");
+
+createRoundButton.addEventListener("click", () => {
+    window.location.href = "http://127.0.0.1:5500/src/createround.html"
+});
+createRoundButton2.addEventListener("click", () => {
+    window.location.href = "http://127.0.0.1:5500/src/createround.html"
+});
+
+const myroundsButton= document.getElementById("nav-rounds");
+const myroundsButton2= document.getElementById("my-rounds-btn");
+
+myroundsButton.addEventListener("click", () => {
+    window.location.href = "http://127.0.0.1:5500/src/myrounds.html"
+});
+myroundsButton2.addEventListener("click", () => {
+    window.location.href = "http://127.0.0.1:5500/src/myrounds.html"
+});
+
+
 const userName = document.getElementById("user-name");
 const saveButton = document.getElementById("save-profile-btn");
 
@@ -84,13 +111,20 @@ async function saveProfile() {
             },
 
             body: JSON.stringify({
-                cleanPhone,cleanInstagram,cleanPostcode,cleanCourse,handicapValue,cleanSkill,cleanAvailability,cleanBio
+                phoneNumber: cleanPhone,
+                instagramHandle: cleanInstagram,
+                postcode: cleanPostcode,
+                homeCourse: cleanCourse,
+                handicap: handicapValue,
+                skillLevel: cleanSkill,
+                availability: cleanAvailability,
+                bio: cleanBio
             })
         });
 
 
         const data = await response.json();
-        console.log("Profile update response:", data);
+        //console.log("Profile update response:", data);
 
 
         if (data.success) {
@@ -106,7 +140,7 @@ async function saveProfile() {
 
     } catch (error) {
         console.error("Error saving profile:", error);
-        showMessage(data.message || error.message || "Error saving profile", "error");
+        showMessage(error.message || "Error saving profile", "error");
         saveButton.disabled = false;
         saveButton.textContent = "Save Profile";
     }
