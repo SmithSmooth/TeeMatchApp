@@ -242,6 +242,8 @@ app.get("/dashboard", authenticateUser, async (req, res) => {
     try {
         const userId = req.user.userId;
 
+        await deactivateExpiredRounds();
+
         const profile = await db.query(`SELECT users.full_name, profiles.phone_number,profiles.instagram_handle,profiles.postcode,
         profiles.home_course,profiles.handicap,profiles.skill_level,profiles.availability,
         profiles.bio FROM users JOIN profiles ON users.id = profiles.user_id WHERE users.id = $1`, [userId]);
@@ -349,9 +351,20 @@ app.get("/my-rounds", authenticateUser, async (req, res) => {
 
     try {
         const userId = req.user.userId;
-        const rounds = await db.query(`SELECT * FROM rounds WHERE creator_id = $1 ORDER BY round_date ASC `, [userId]);
 
-        res.json(rounds.rows);
+        await deactivateExpiredRounds();
+
+        const created = await db.query(`SELECT * FROM rounds WHERE creator_id = $1 AND is_active = true ORDER BY round_date ASC ,tee_time ASC `, [userId]);
+
+        const history = await db.query(
+            `SELECT * FROM rounds WHERE creator_id = $1 AND is_active = false ORDER BY round_date DESC`, [userId]);
+
+        res.json({
+            created: created.rows,
+            joined: [],
+            history: history.rows
+        });
+
 
     }
     catch (error) {
@@ -394,6 +407,71 @@ app.put("/rounds/:id", authenticateUser, async (req, res) => {
         const userId = req.user.userId;
         const { courseName, roundDate, teeTime, playersNeeded, notes } = req.body;
 
+        // validate the round data in the backend
+
+        if (!courseName || courseName.trim().length === 0) {
+            return res.status(400).json({
+                success: false,
+                message: "Course name required."
+    
+            });
+    
+        }
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+    
+        const selectedDate = new Date(roundDate);
+    
+        if (selectedDate < today) {
+            return res.status(400).json({
+                success: false,
+                message: "Round date cannot be in the past."
+    
+            });
+        }
+    
+        const hour = parseInt(teeTime.split(":")[0]);
+    
+        if (hour < 6 || hour >= 18) {
+            return res.status(400).json({
+                success: false,
+                message: "Invalid tee time."
+            });
+        }
+    
+        const playerCount = parseInt(playersNeeded);
+    
+        if (isNaN(playerCount) || playerCount < 1 || playerCount > 3) {
+            return res.status(400).json({
+                success: false,
+                message: "Players needed must be between 1 and 3."
+            });
+        }
+    
+        if (notes && notes.length > 500) {
+            return res.status(400).json({
+                success: false,
+                message: "Notes too long."
+            });
+        }
+    
+        const now = new Date();
+    
+        const isToday = selectedDate.toDateString() === now.toDateString();
+        if (isToday) {
+            const currentHour = now.getHours();
+            const selectedHour = parseInt(teeTime.split(":")[0]);
+    
+            if (selectedHour <= currentHour) {
+                return res.status(400).json({
+                    success: false,
+                    message: "Please choose a future tee time."
+                });
+    
+            }
+    
+        }
+    
         const result = await db.query(`UPDATE rounds SET course_name = $1, round_date = $2,
                 tee_time = $3,players_needed = $4,notes = $5 WHERE id = $6 AND creator_id = $7 RETURNING * `,
             [courseName, roundDate, teeTime, playersNeeded, notes, roundId, userId]);
@@ -422,3 +500,11 @@ app.put("/rounds/:id", authenticateUser, async (req, res) => {
 app.listen(3000, () => {
     console.log("Server running");
 });
+
+async function deactivateExpiredRounds() {
+    // this is to set a false bool value to is active if the time and date of the 
+    //round is in past time
+    await db.query(`UPDATE rounds SET is_active = false WHERE is_active = true AND (round_date + tee_time) < NOW() `);
+
+}
+

@@ -133,6 +133,14 @@ header{
         flex-direction:column;
 
     }
+    #round-tabs{
+        gap:6px;
+    }
+
+    .tab-button{
+        padding:12px;
+        font-size:14px;
+    }
 
 }
 
@@ -187,4 +195,29 @@ header{
     background:#ff5b5b;
     color:white;
     cursor:pointer;
+}
+
+#round-tabs{
+    display:flex;
+    gap:10px;
+    margin-bottom:20px;
+}
+
+.tab-button{
+    flex:1;
+    border:none;
+    padding:14px;
+    border-radius:12px;
+    background:white;
+    color:#4da6ff;
+    font-weight:600;
+    cursor:pointer;
+}
+.tab-button:hover{
+    background:#4da6ff;
+    color:white;
+}
+.active-tab{
+    background:#4da6ff;
+    color:white;
 }
