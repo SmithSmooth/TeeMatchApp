@@ -17,6 +17,7 @@ header{
     padding:20px;
 
     text-align:center;
+    color:#4da6ff;
 
 }
 
@@ -220,4 +221,31 @@ header{
 .active-tab{
     background:#4da6ff;
     color:white;
+}
+
+.hostDetailsJoinedTab h4{
+    text-align: center;
+}
+.round-stats{
+    display:flex;
+    gap:10px;
+    margin-top:15px;
+}
+.stat-box{
+    flex:1;
+    background:#f5f9ff;
+    border-radius:12px;
+    padding:12px;
+    text-align:center;
+}
+.stat-number{
+    display:block;
+    font-size:1.4rem;
+    font-weight:bold;
+    color:#4da6ff;
+    
+}
+#showErrorMessage{
+    text-align: center;
+    margin:5px;
 }

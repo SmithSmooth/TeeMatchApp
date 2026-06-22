@@ -1,0 +1,142 @@
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#bddeff;
+    padding-bottom:90px;
+
+}
+header{
+    background:white;
+    padding:20px;
+    text-align:center;
+    color: #4da6ff;
+
+}
+#browse-container{
+    width:95%;
+    max-width:900px;
+    margin:auto;
+}
+
+.page-banner{
+    background:white;
+    padding:20px;
+    border-radius:16px;
+    margin:20px 0;
+}
+
+.search-container{
+    margin-bottom:20px;
+    align-self: center;
+}
+
+#search-input{
+    width:50%;
+    padding:14px;
+    border:none;
+    border-radius:12px;
+    text-align: center;
+}
+
+.round-card{
+    background:white;
+    padding:20px;
+    border-radius:16px;
+    margin-bottom:20px;
+    
+}
+
+.round-buttons{
+    display:flex;
+    gap:10px;
+    margin-top:15px;
+}
+
+.view-host-btn,
+.request-btn{
+    flex:1;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+}
+.req-pending-btn,.req-joined-btn{
+    flex:1;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    background-color: #38b000;
+    opacity: 50%;
+    color: black;
+}
+.req-rejected-btn{
+    flex:1;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    background-color: red;
+    opacity: 50%;
+    color: black;
+}
+
+
+.view-host-btn{
+    background:#4da6ff;
+    color:white;
+}
+
+.request-btn{
+    background:#38b000;
+    color:white;
+}
+
+#host-modal{
+    display:none;
+    position:fixed;
+    top:0;
+    left:0;
+
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,.5);
+    justify-content:center;
+    align-items:center;
+
+}
+
+#host-modal-content{
+    width:90%;
+    max-width:450px;
+    background:white;
+    padding:25px;
+    border-radius:16px;
+
+}
+#close-modal-btn{
+    flex:1;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    
+}
+
+#bottom-nav{
+    position:fixed;
+    bottom:0;
+    left:0;
+    width:100%;
+    background:white;
+    display:flex;
+    justify-content:space-around;
+    padding:15px 0;
+}
+
+#close-modal-btn{
+    background-color: red;
+}
+#roundDetailsOnBrowser{
+    float:right;
+}

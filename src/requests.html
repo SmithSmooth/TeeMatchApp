@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Tee Match - Requests</title>
+
+    <link rel="stylesheet" href="/css/requests.css">
+
+</head>
+
+<body>
+
+    <header class="top-header"><h1 class="app-title"> Tee Match</h1></header>
+
+    <main class="requests-page">
+
+        <section class="welcome-banner">
+
+            <h2>
+                Round Requests
+            </h2>
+
+            <p>
+                Review golfers requesting to join your rounds.
+            </p>
+
+        </section>
+
+        <section id="requests-container">
+
+            <!-- Request cards injected by JS -->
+
+        </section>
+
+    </main>
+
+    <!-- Profile Modal -->
+
+    <div id="profile-modal" class="modal">
+
+        <div class="modal-content">
+
+            <button id="close-modal" class="close-button">
+                ✕
+            </button>
+
+            <h2 id="modal-name">
+                Golfer Name
+            </h2>
+
+            <div class="profile-details">
+
+                <div class="detail-card">
+
+                    <span class="detail-label">
+                        Handicap
+                    </span>
+
+                    <span id="modal-handicap">
+                        12
+                    </span>
+
+                </div>
+
+                <div class="detail-card">
+
+                    <span class="detail-label">
+                        Skill Level
+                    </span>
+
+                    <span id="modal-skill">
+                        Intermediate
+                    </span>
+
+                </div>
+
+            </div>
+
+            <div class="bio-section">
+
+                <h3>
+                    About
+                </h3>
+
+                <p id="modal-bio">
+                    User bio goes here...
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <nav class="bottom-nav">
+
+        <a href="dashboard.html"> Home</a>
+
+        <a href="browserounds.html">Browse</a>
+
+        <a href="myrounds.html"> My Rounds</a>
+        <a href="requests.html" class="active-nav">Requests</a>
+
+    </nav>
+
+    <script src="/js/requests.js"></script>
+
+</body>
+
+</html>

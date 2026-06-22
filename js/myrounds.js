@@ -7,6 +7,25 @@ let joinedRounds = [];
 let historyRounds = [];
 let currentRoundId = null;
 //let allRounds = [];
+let showErrorMessageP=document.getElementById("showErrorMessage")
+
+function showMessage(message,status){
+    showErrorMessageP.textContent="";
+    //showErrorMessageP.style="visibility: none;"
+    if(status){
+        showErrorMessageP.textContent=message
+        showErrorMessageP.style="color :green;"
+        return;
+    }
+    if(!status){
+        showErrorMessageP.textContent=message
+        showErrorMessageP.style="color :red;"
+        return
+    }
+
+}
+
+
 
 document.querySelectorAll(".tab-button").forEach(button => {
     button.addEventListener("click", () => {
@@ -15,7 +34,7 @@ document.querySelectorAll(".tab-button").forEach(button => {
             btn.classList.remove("active-tab"));
 
         button.classList.add("active-tab");
-        activeTab =button.dataset.tab;
+        activeTab = button.dataset.tab;
         renderCurrentTab();
     }
 
@@ -23,21 +42,20 @@ document.querySelectorAll(".tab-button").forEach(button => {
 
 });
 
-function renderCurrentTab(){
+function renderCurrentTab() {
 
-    switch(activeTab){
+    switch (activeTab) {
 
         case "created":
-            displayRounds(createdRounds,true);
+            displayCreatedRounds(createdRounds, true);
             break;
 
         case "joined":
-            displayRounds(joinedRounds,false);
+            displayJoinedRounds(joinedRounds);
             break;
 
         case "history":
-            displayRounds(historyRounds,false);
-
+            displayRounds(historyRounds, false);
             break;
 
     }
@@ -50,16 +68,18 @@ async function loadRounds() {
         const response = await fetch("http://localhost:3000/my-rounds",
             {
                 headers: {
-                    Authorization:
-                        `Bearer ${token}`
+                    Authorization: `Bearer ${token}`
                 }
             });
 
-        const data=await response.json()
+        const data = await response.json()
 
-        createdRounds =data.created;
-        joinedRounds =data.joined;
-        historyRounds =data.history;
+        createdRounds = data.created;
+        joinedRounds = data.joined;
+
+        historyRounds = data.history;
+        //console.log(createdRounds)
+
 
         renderCurrentTab();
     } catch (error) {
@@ -68,37 +88,104 @@ async function loadRounds() {
 
 }
 
-function displayRounds(rounds,allowEditing) {
+function displayCreatedRounds(rounds, allowEditing) {
     const container = document.getElementById("rounds-container");
     container.innerHTML = "";
 
-    if(rounds.length === 0){
+    if (rounds.length === 0) {
 
-        container.innerHTML =
-    
-        `
+        container.innerHTML =`
         <div class="round-card">
             <p>
                 No rounds found.
             </p>
         </div>
         `;
-    
+
         return;
-    
+
     }
 
     rounds.forEach(round => {
-        let buttons="";
-        if(allowEditing){
-            buttons=`
+        let buttons = "";
+        const joined = parseInt(round.joined_count);
+        const pending = parseInt(round.pending_count);
+        const spotsLeft = round.players_needed - joined - pending;
+
+        if (allowEditing) {
+            buttons = `
             <div class="card-buttons">
                 <button class="edit-btn" onclick="editRound('${round.id}')">Edit</button>
     
                 <button class="delete-btn"  onclick="deleteRound('${round.id}')"> Delete </button>
             </div>
             `;
+
+        }
+
+        container.innerHTML += `<div class="round-card">
+
+            <h4>${round.course_name}</h4>
+            <p><strong>Round Date:</strong> ${formatPgDate(round.round_date)}</p>
+            <p><Strong>Tee Time:</strong> ${round.tee_time}</p>
+
+            <div class="round-stats">
+                <div class="stat-box">
+                    <span class="stat-number">${spotsLeft}</span>
+                    <span>Spots Left</span>
+
+                </div>
+
+            <div class="stat-box">
+                <span class="stat-number">${joined}</span>
+                <span>Joined</span>
+
+            </div>
+
+            <div class="stat-box">
+                <span class="stat-number">${pending}</span>
+                <span>Pending</span>
+
+            </div>
+
+        </div>
+            ${buttons}
+        </div>
+        `;
+
+    })
+
+}
+
+
+function displayRounds(rounds, allowEditing) {
+    const container = document.getElementById("rounds-container");
+    container.innerHTML = "";
+
+    if (rounds.length === 0) {
+        container.innerHTML = `
+        <div class="round-card">
+            <p>
+                No rounds found.
+            </p>
+        </div>
+        `;
+
+        return;
+
+    }
+
+    rounds.forEach(round => {
+        let buttons = "";
+        if (allowEditing) {
+            buttons = `
+            <div class="card-buttons">
+                <button class="edit-btn" onclick="editRound('${round.id}')">Edit</button>
     
+                <button class="delete-btn"  onclick="deleteRound('${round.id}')"> Delete </button>
+            </div>
+            `;
+
         }
 
         container.innerHTML +=
@@ -106,10 +193,74 @@ function displayRounds(rounds,allowEditing) {
         <div class="round-card">
 
             <h4>${round.course_name}</h4>
-            <p>Round Date: ${formatPgDate(round.round_date)}</p>
-            <p>Tee Time: ${round.tee_time}</p>
+            <p><strong>Round Date:</strong> ${formatPgDate(round.round_date)}</p>
+            <p><Strong>Tee Time:</strong> ${round.tee_time}</p>
 
             ${buttons}
+        </div>
+        `;
+
+    })
+
+}
+function displayJoinedRounds(rounds) {
+    const container = document.getElementById("rounds-container");
+    container.innerHTML = "";
+
+
+    if (rounds.length === 0) {
+        container.innerHTML =
+
+            `
+        <div class="round-card">
+            <p>
+                No rounds found.
+            </p>
+        </div>
+        `;
+
+        return;
+
+    }
+
+    rounds.forEach(round => {
+        let details = "";
+
+        if (round.status === "accepted") {
+            details = `
+            <div class="card-buttons">
+                <div class="hostDetailsJoinedTab">
+                <h4>Host Details</h4>
+                     <p><em>Host: </em>${round.creator_name} </p>
+                     <p><em>Contact: </em> ${round.phone_number} </p>
+                     <p><em>IG Handle: </em> ${round.instagram_handle} </p>
+                </div>
+    
+                <button class="delete-btn"  onclick="leaveRound('${round.round_id}','${"Leave Round ?? "}')"> Leave Round </button>
+            </div>
+            `;
+        } else if (round.status === "rejected") {
+            details = `
+            <div class="card-buttons">
+                <button class="delete-btn"  onclick="leaveRound('${round.round_id}','${"Remove Round ?? "}')"> Remove </button>
+            </div>
+            `;
+        } else if (round.status === "pending") {
+            details = `
+            <div class="card-buttons">
+                <button class="delete-btn"  onclick="leaveRound('${round.round_id}','${"Cancel Request ?? "}')"> Cancel Request</button>
+            </div>
+            `;
+        }
+
+        container.innerHTML += `<div class="round-card">
+
+            <h4><u>${round.course_name}</u></h4>
+            <p><strong>Status: </strong>${round.status.charAt(0).toUpperCase() + round.status.slice(1)}</p>
+            <p><strong>Round Date:</strong> ${formatPgDate(round.round_date)}</p>
+            <p><Strong>Tee Time:</strong> ${round.tee_time}</p>
+
+            ${details}
         </div>
         `;
 
@@ -145,6 +296,36 @@ async function deleteRound(roundId) {
 
 }
 
+async function leaveRound(roundId, mm) {
+
+    const confirmed = confirm(mm);
+
+    if (!confirmed) {
+        return;
+    }
+    try {
+        const response = await fetch(`http://localhost:3000/rounds/${roundId}/leave-round`,
+            {
+                method: "DELETE",
+                headers: {
+                    Authorization:
+                        `Bearer ${token}`
+                }
+            });
+
+        const data = await response.json();
+        alert(data.message);
+        loadRounds();
+
+    }
+    catch (error) {
+        console.error(error);
+    }
+
+}
+
+
+
 // Function to safely format PostgreSQL ISO date strings
 function formatPgDate(pgDateString) {
     try {
@@ -175,9 +356,11 @@ function formatPgDate(pgDateString) {
 }
 
 function editRound(id) {
-    
+
     const round = createdRounds.find(r => r.id === id);
     currentRoundId = id;
+
+    showErrorMessageP.textContent=""
 
 
     let d = new Date(round.round_date)
@@ -201,26 +384,27 @@ async function saveRoundChanges() {
         return;
     }
 
-    const validation=validateRoundData(
-         document.getElementById("edit-course").value,
-         document.getElementById("edit-date").value,
-         document.getElementById("edit-time").value,
-         document.getElementById("edit-players").value,
+    const validation = validateRoundData(
+        document.getElementById("edit-course").value,
+        document.getElementById("edit-date").value,
+        document.getElementById("edit-time").value,
+        document.getElementById("edit-players").value,
         document.getElementById("edit-notes").value
     )
 
-    if(!validation.valid){
-        alert(validation.message)
+    if (!validation.valid) {
+        showMessage(validation.message,false)
         return
     }
+    
 
     try {
         const response = await fetch(`http://localhost:3000/rounds/${currentRoundId}`,
             {
                 method: "PUT",
                 headers: {
-                    "Content-Type":"application/json",
-                    Authorization:`Bearer ${token}`
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
                 }, body: JSON.stringify({
                     courseName: document.getElementById("edit-course").value,
                     roundDate: document.getElementById("edit-date").value,
@@ -232,7 +416,13 @@ async function saveRoundChanges() {
 
         const data = await response.json();
 
-        alert(data.message);
+        if(!data.success){
+            showMessage(data.message,false)
+            return
+        }else{
+            showMessage(data.message,true)
+            
+        }
 
         document.getElementById("edit-modal").style.display = "none";
         loadRounds();
@@ -250,59 +440,65 @@ document.getElementById("cancel-edit-btn").addEventListener("click", () => {
 });
 
 
-function validateRoundData(courseName,roundDate,teeTime,playersNeeded){
-    if(!courseName.trim()){
-        return{
-            valid:false,
-            message:"Please enter a course name."
+function validateRoundData(bio,courseName, roundDate, teeTime, playersNeeded) {
+    if (!courseName.trim()) {
+        return {
+            valid: false,
+            message: "Please enter a course name."
         };
     }
-    if(courseName.length > 150){
+    if(bio.length > 300){
         return{
             valid:false,
-            message:"Course name is too long."
+            message:"Bio cannot exceed 300 characters."
+        }
+    }
+    if (courseName.length > 150) {
+        return {
+            valid: false,
+            message: "Course name is too long."
         };
     }
-    if(!roundDate){
-        return{
-            valid:false,
-            message:"Please select a date."
+    if (!roundDate) {
+        return {
+            valid: false,
+            message: "Please select a date."
         };
     }
-    if(!teeTime){
-        return{
-            valid:false,
-            message:"Please select a tee time."
-        };
-    }
-
-    const playerCount =parseInt(playersNeeded);
-    if(isNaN(playerCount)||playerCount < 1 || playerCount > 3){
-        return{
-            valid:false,
-            message:"Players needed must be between 1 and 3."
-        };
-    }
-
-    const today =new Date();
-    today.setHours( 0,0,0,0);
-
-    const selectedDate =new Date(roundDate);
-
-    if(selectedDate < today){
-        return{
-            valid:false,
-            message:"Date cannot be in the past."
+    if (!teeTime) {
+        return {
+            valid: false,
+            message: "Please select a tee time."
         };
     }
 
-    const hour =parseInt( teeTime.split(":")[0]);
-
-    if(hour < 6 || hour >= 18){
-        return{
-            valid:false,
-            message:"Tee time must be between 06:00 and 18:00."
+    const playerCount = parseInt(playersNeeded);
+    if (isNaN(playerCount) || playerCount < 1 || playerCount > 3) {
+        return {
+            valid: false,
+            message: "Players needed must be between 1 and 3."
         };
     }
-    return{valid:true};
+
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    const selectedDate = new Date(roundDate);
+
+    if (selectedDate < today) {
+        return {
+            valid: false,
+            message: "Date cannot be in the past."
+        };
+    }
+
+    const hour = parseInt(teeTime.split(":")[0]);
+
+    if (hour < 6 || hour >= 18) {
+        return {
+            valid: false,
+            message: "Tee time must be between 06:00 and 18:00."
+        };
+    }
+    return { valid: true };
 }

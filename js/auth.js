@@ -39,19 +39,14 @@ loginForm.addEventListener("submit", async (e) => {
 
     const email =document.getElementById("login-email").value;
     const password =document.getElementById("login-password").value;
+    const errorBox =document.getElementById("error-message-container");
+    const errorText =document.getElementById("error-message-text");
 
         if(!emailPattern.test(email)){
 
-            errorText.textContent =
-            "Please enter a valid email address";
-        
-            errorBox.classList.remove(
-            "hidden-message"
-            );
-    
-            showError(
-                "Please enter a valid email"
-            );
+            errorText.textContent = "Please enter a valid email address";
+            errorBox.classList.remove("hidden-message");
+            showError("Please enter a valid email" );
         
             return;
         }
@@ -105,51 +100,29 @@ signupForm.addEventListener("submit", async (e) => {
     const errorText =document.getElementById("error-message-text");
 
     if(!emailPattern.test(email)){
-
-        errorText.textContent =
-        "Please enter a valid email address";
-    
-        errorBox.classList.remove(
-        "hidden-message"
-        );
-
-        showError(
-            "Please enter a valid email"
-        );
+        errorText.textContent ="Please enter a valid email address";
+        errorBox.classList.remove("hidden-message");
+        showError( "Please enter a valid email");
     
         return;
     }
 
     if (password !== confirmPassword) {
 
-        errorText.textContent =
-            "Passwords do not match";
-
-        errorBox.classList.remove(
-            "hidden-message"
-        );
-        showError(
-            "Passwords do not match"
-        );
-
+        errorText.textContent = "Passwords do not match";
+        errorBox.classList.remove("hidden-message");
+        showError("Passwords do not match");
         return;
     }
 
     if(password.length < 8){
 
-        errorText.textContent =
-        "Password must be at least 8 characters";
-    
-        errorBox.classList.remove(
-        "hidden-message"
-        );
-        showError(
-            "Password must be at least 8 characters"
-        );
-    
+        errorText.textContent ="Password must be at least 8 characters";
+        errorBox.classList.remove("hidden-message");
+        showError("Password must be at least 8 characters");
         return;
     }
-
+    
 
     try {
 

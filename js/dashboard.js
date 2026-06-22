@@ -31,6 +31,20 @@ myroundsButton2.addEventListener("click", () => {
     window.location.href = "http://127.0.0.1:5500/src/myrounds.html"
 });
 
+const browserRoundsButton=document.getElementById("browse-rounds-btn")
+const browserRoundsButton2=document.getElementById("nav-browse")
+browserRoundsButton.addEventListener("click",()=>{
+    window.location.href = "http://127.0.0.1:5500/src/browserounds.html"
+})
+browserRoundsButton2.addEventListener("click",()=>{
+    window.location.href = "http://127.0.0.1:5500/src/browserounds.html"
+})
+
+const requestPageBtn=document.getElementById("requests-btn")
+requestPageBtn.addEventListener("click",()=>{
+    window.location.href = "http://127.0.0.1:5500/src/requests.html"
+})
+
 
 const userName = document.getElementById("user-name");
 const saveButton = document.getElementById("save-profile-btn");
@@ -87,7 +101,7 @@ async function saveProfile() {
     try {
         const validationResult =validateProfile();
         if(!validationResult.valid){
-            showMessage("Please enter a valid postcode.","error");
+            showMessage(validationResult.message,"error");
             saveButton.disabled = false;
             saveButton.textContent = "Save Profile";
             return;
@@ -164,8 +178,6 @@ function validateProfile(){
         };
     
     }
-
-
     // bio
     if(bio1.length > 300){
         return {
@@ -185,43 +197,33 @@ function validateProfile(){
             return {
                 valid:false,
                 message:"Please enter a valid phone number."}
-
         }
-
     }
 
     // Postcode
 
     if(postcode1 !== ""){
-
         const postcodeRegex =/^[A-Za-z]{1,2}[0-9][A-Za-z0-9]?\s?[0-9][A-Za-z]{2}$/;
-
         if(!postcodeRegex.test(postcode1)){
 
             return {
                 valid:false,
                 message:"Please enter a valid UK postcode."
-            };
-
-        }
+            }}
 
     }
 
     // Handicap
 
     if(handicap1 !== ""){
-
         const handicapValue =parseFloat(handicap1);
-
-        if(isNaN(handicapValue) || handicapValue < 0 || handicapValue > 54){
+        //+10 handicap is the least handicap we could go on to
+        if(isNaN(handicapValue) || handicapValue < -10 || handicapValue > 54){
             return {
                 valid:false,
-                message:"Handicap must be between 0 and 54."
+                message:"Handicap must be between -10 and 54."
 
-            };
-
-        }
-
+            }}
     }
 
     return {valid:true};
