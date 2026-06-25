@@ -3,15 +3,24 @@ const express = require("express");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const cors = require("cors");
-const db=require("../database/db")//"/Users/smith/TeeMatchApp/database/db"
+const db=require("./database/db")//"/Users/smith/TeeMatchApp/database/db"
 const { v4: uuidv4 } = require("uuid");
 
 
 const app = express();
 
+const allowedOrigins = ["http://127.0.0.1:5500","http://localhost:5500",process.env.CLIENT_URL];
+  
+
 
 app.use(cors({
-    origin: "http://127.0.0.1:5500",
+    origin: function (origin, callback) {
+        if (!origin || allowedOrigins.includes(origin)) {
+          callback(null, true);
+        } else {
+          callback(new Error("Not allowed by CORS"));
+        }
+      },
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization", "Access-Control-Allow-Origin"],
 }));
@@ -51,6 +60,7 @@ function authenticateUser(req, res, next) {
 
 
 app.use(express.json());
+app.use(express.static("public"));
 
 app.get("/", async (req, res) => {
 
