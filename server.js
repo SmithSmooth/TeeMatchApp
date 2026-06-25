@@ -60,6 +60,7 @@ function authenticateUser(req, res, next) {
 
 
 app.use(express.json());
+
 app.use(express.static("public"));
 
 app.get("/", async (req, res) => {
