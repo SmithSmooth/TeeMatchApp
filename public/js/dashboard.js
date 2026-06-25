@@ -69,7 +69,7 @@ async function loadDashboardData() {
         }
 
         const data = await response.json();
-        console.log("Dashboard data:", data);
+        //console.log("Dashboard data:", data);
 
         userName.textContent = data.full_name;
 

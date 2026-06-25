@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
 async function loadRounds() {
     try {
 
-        const response = await fetch("http://localhost:3000/rounds",
+        const response = await fetch("/rounds",
             {
                 headers: {
                     Authorization: `Bearer ${token}`
@@ -147,7 +147,7 @@ async function requestToJoin(roundId) {
 
     try {
 
-        const response = await fetch("http://localhost:3000/requests", {
+        const response = await fetch("/requests", {
             method: "POST",
 
             headers: {

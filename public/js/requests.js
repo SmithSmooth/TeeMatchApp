@@ -19,7 +19,7 @@ window.addEventListener("click", (event) => {
 
 async function loadRequests() {
     try {
-        const response = await fetch("http://localhost:3000/requests",
+        const response = await fetch("/requests",
             {
                 headers: {Authorization: `Bearer ${token}`}
             }
@@ -177,7 +177,7 @@ async function acceptRequest(requestId) {
 
         const response = await fetch(
 
-            `http://localhost:3000/requests/${requestId}/accept`,
+            `/requests/${requestId}/accept`,
 
             {
                 method: "PUT",
@@ -208,7 +208,7 @@ async function rejectRequest(requestId) {
 
         const response = await fetch(
 
-            `http://localhost:3000/requests/${requestId}/reject`,
+            `/requests/${requestId}/reject`,
 
             {
                 method: "PUT",

@@ -65,7 +65,7 @@ function renderCurrentTab() {
 async function loadRounds() {
     try {
 
-        const response = await fetch("http://localhost:3000/my-rounds",
+        const response = await fetch("/my-rounds",
             {
                 headers: {
                     Authorization: `Bearer ${token}`
@@ -276,7 +276,7 @@ async function deleteRound(roundId) {
         return;
     }
     try {
-        const response = await fetch(`http://localhost:3000/rounds/${roundId}`,
+        const response = await fetch(`/rounds/${roundId}`,
             {
                 method: "DELETE",
                 headers: {
@@ -304,7 +304,7 @@ async function leaveRound(roundId, mm) {
         return;
     }
     try {
-        const response = await fetch(`http://localhost:3000/rounds/${roundId}/leave-round`,
+        const response = await fetch(`/rounds/${roundId}/leave-round`,
             {
                 method: "DELETE",
                 headers: {
@@ -399,7 +399,7 @@ async function saveRoundChanges() {
     
 
     try {
-        const response = await fetch(`http://localhost:3000/rounds/${currentRoundId}`,
+        const response = await fetch(`/rounds/${currentRoundId}`,
             {
                 method: "PUT",
                 headers: {

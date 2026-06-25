@@ -117,7 +117,7 @@ async function createRound(event) {
         const playersNeeded = document.getElementById("players-needed").value;
         const notes = document.getElementById("round-notes").value.trim();
 
-        const response = await fetch("http://localhost:3000/rounds",
+        const response = await fetch("/rounds",
             {
                 method: "POST",
                 headers: {
@@ -143,7 +143,7 @@ async function createRound(event) {
         if (response.ok) {
             showMessage(data.message, "success");
             form.reset();
-            window.location.href = "http://127.0.0.1:5500/src/dashboard.html"
+            window.location.href = "/dashboard.html"
         }
         else {
             showMessage(data.message, "error");
