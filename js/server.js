@@ -3,7 +3,7 @@ const express = require("express");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const cors = require("cors");
-"/Users/smith/TeeMatchApp/database/db"//"/Users/smith/TeeMatchApp/database/db"
+const db=require("database/db")//"/Users/smith/TeeMatchApp/database/db"
 const { v4: uuidv4 } = require("uuid");
 
 
