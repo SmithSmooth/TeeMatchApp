@@ -75,7 +75,6 @@ select,
 textarea{
 
     width:100%;
-
     padding:12px;
 
     border:1px solid #d6d6d6;
@@ -158,6 +157,9 @@ textarea{
 
     border:1px solid #ffb3b3;
 
+}
+.tee-time,.round-date{
+    margin-right: 20px;
 }
 
 @media(max-width:768px){

@@ -143,7 +143,7 @@ async function createRound(event) {
         if (response.ok) {
             showMessage(data.message, "success");
             form.reset();
-            window.location.href = "/dashboard.html"
+            window.location.href = "/src/dashboard.html"
         }
         else {
             showMessage(data.message, "error");
