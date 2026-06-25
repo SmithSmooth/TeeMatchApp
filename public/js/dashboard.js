@@ -1,6 +1,6 @@
 const token = localStorage.getItem("token");
 if (!token) {
-    window.location.href = "http://127.0.0.1:5500/src/index.html";
+    window.location.href = "/index.html";
 }
 
 document.getElementById("logout-btn").addEventListener("click",logout);
@@ -8,17 +8,17 @@ document.getElementById("logout-btn").addEventListener("click",logout);
 const homeButton = document.getElementById("nav-home");
 
 homeButton.addEventListener("click", () => {
-    window.location.href = "http://127.0.0.1:5500/src/dashboard.html"
+    window.location.href = ""//"http://127.0.0.1:5500/src/dashboard.html"
 });
 
 const createRoundButton = document.getElementById("nav-create");
 const createRoundButton2 = document.getElementById("create-round-btn");
 
 createRoundButton.addEventListener("click", () => {
-    window.location.href = "http://127.0.0.1:5500/src/createround.html"
+    window.location.href = "/public/src/createround.html"//"http://127.0.0.1:5500/src/createround.html"
 });
 createRoundButton2.addEventListener("click", () => {
-    window.location.href = "http://127.0.0.1:5500/src/createround.html"
+    window.location.href = "/public/src/createround.html"//"http://127.0.0.1:5500/src/createround.html"
 });
 
 const myroundsButton= document.getElementById("nav-rounds");
