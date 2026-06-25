@@ -8,41 +8,41 @@ document.getElementById("logout-btn").addEventListener("click",logout);
 const homeButton = document.getElementById("nav-home");
 
 homeButton.addEventListener("click", () => {
-    window.location.href = ""//"http://127.0.0.1:5500/src/dashboard.html"
+    window.location.href = "/src/dashboard.html"//"http://127.0.0.1:5500/src/dashboard.html"
 });
 
 const createRoundButton = document.getElementById("nav-create");
 const createRoundButton2 = document.getElementById("create-round-btn");
 
 createRoundButton.addEventListener("click", () => {
-    window.location.href = "/public/src/createround.html"//"http://127.0.0.1:5500/src/createround.html"
+    window.location.href = "/src/createround.html"//"http://127.0.0.1:5500/src/createround.html"
 });
 createRoundButton2.addEventListener("click", () => {
-    window.location.href = "/public/src/createround.html"//"http://127.0.0.1:5500/src/createround.html"
+    window.location.href = "/src/createround.html"//"http://127.0.0.1:5500/src/createround.html"
 });
 
 const myroundsButton= document.getElementById("nav-rounds");
 const myroundsButton2= document.getElementById("my-rounds-btn");
 
 myroundsButton.addEventListener("click", () => {
-    window.location.href = "http://127.0.0.1:5500/src/myrounds.html"
+    window.location.href = "/src/myrounds.html"
 });
 myroundsButton2.addEventListener("click", () => {
-    window.location.href = "http://127.0.0.1:5500/src/myrounds.html"
+    window.location.href = "/src/myrounds.html"
 });
 
 const browserRoundsButton=document.getElementById("browse-rounds-btn")
 const browserRoundsButton2=document.getElementById("nav-browse")
 browserRoundsButton.addEventListener("click",()=>{
-    window.location.href = "http://127.0.0.1:5500/src/browserounds.html"
+    window.location.href = "/src/browserounds.html"
 })
 browserRoundsButton2.addEventListener("click",()=>{
-    window.location.href = "http://127.0.0.1:5500/src/browserounds.html"
+    window.location.href = "/src/browserounds.html"
 })
 
 const requestPageBtn=document.getElementById("requests-btn")
 requestPageBtn.addEventListener("click",()=>{
-    window.location.href = "http://127.0.0.1:5500/src/requests.html"
+    window.location.href = "/src/requests.html"
 })
 
 
@@ -63,7 +63,7 @@ saveButton.addEventListener("click", saveProfile);
 
 async function loadDashboardData() {
     try {
-        const response = await fetch("http://localhost:3000/dashboard", { headers: { Authorization: `Bearer ${token}` } });
+        const response = await fetch("/dashboard", { headers: { Authorization: `Bearer ${token}` } });
         if (!response.ok) {
             throw new Error("Failed to fetch dashboard data");
         }
@@ -91,7 +91,7 @@ async function loadDashboardData() {
 
 function logout() {
     localStorage.removeItem("token");
-    window.location.href = "/public/index.html";
+    window.location.href = "/index.html";
 }
 
 async function saveProfile() {
@@ -117,7 +117,7 @@ async function saveProfile() {
         const cleanBio =bio.value.trim() || null;
 
 
-        const response = await fetch("http://localhost:3000/profile", {
+        const response = await fetch("/profile", {
             method: "PUT",
             headers: {
                 "Content-Type":"application/json",
