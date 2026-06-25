@@ -53,9 +53,7 @@ loginForm.addEventListener("submit", async (e) => {
 
     try {
 
-        const response = await fetch(
-            "http://localhost:3000/login",
-            {
+        const response = await fetch("/login",{
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -75,7 +73,7 @@ loginForm.addEventListener("submit", async (e) => {
         }
 
         localStorage.setItem("token", data.token);
-        window.location.href = "http://127.0.0.1:5500/src/dashboard.html";
+        window.location.href = "/src/dashboard.html";
 
 
     } catch (error) {
@@ -127,7 +125,7 @@ signupForm.addEventListener("submit", async (e) => {
     try {
 
         const response = await fetch(
-            "http://localhost:3000/signup",
+            "/signup",
             {
                 method: "POST",
                 headers: {
@@ -146,7 +144,7 @@ signupForm.addEventListener("submit", async (e) => {
         
         if(data.success){
             localStorage.setItem("token", data.token);
-            window.location.href = "http://127.0.0.1:5500/src/dashboard.html"
+            window.location.href = "/src/dashboard.html"
         }else if(!data.success){
             errorText.textContent = data.message;
             errorBox.classList.remove("hidden-message");
