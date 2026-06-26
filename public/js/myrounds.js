@@ -407,11 +407,11 @@ async function saveRoundChanges() {
                     "Content-Type": "application/json",
                     Authorization: `Bearer ${token}`
                 }, body: JSON.stringify({
-                    courseName: document.getElementById("edit-course").value,
+                    courseName: document.getElementById("edit-course").value.trim(),
                     roundDate: document.getElementById("edit-date").value,
                     teeTime: document.getElementById("edit-time").value,
-                    playersNeeded: document.getElementById("edit-players").value,
-                    notes: document.getElementById("edit-notes").value
+                    playersNeeded: document.getElementById("edit-players").value.trim(),
+                    notes: document.getElementById("edit-notes").value.trim()
                 })
             });
 
