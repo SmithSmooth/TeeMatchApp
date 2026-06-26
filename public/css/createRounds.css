@@ -158,28 +158,23 @@ textarea{
     border:1px solid #ffb3b3;
 
 }
-.tee-time,.round-date{
-    margin-right: 20px;
-}
+
 
 @media(max-width:768px){
 
     #create-round-container{
-
         width:92%;
-
     }
 
     .page-banner{
-
         padding:20px;
-
     }
 
     #create-round-form{
-
         padding:20px;
-
+    }
+    .tee-time,.round-date{
+        margin-right: 20px;
     }
 
     input,
