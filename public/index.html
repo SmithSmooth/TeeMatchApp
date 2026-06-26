@@ -70,14 +70,7 @@
             <form id="login-form">
 
                 <input type="email" id="login-email" class="form-input" placeholder="Email Address" required>
-
-                <input
-                    type="password"
-                    id="login-password"
-                    class="form-input"
-                    placeholder="Password"
-                    required
-                >
+                <input type="password"  id="login-password" class="form-input" placeholder="Password" required>
 
                 <!--<div id="forgot-password-container">
 
@@ -85,13 +78,7 @@
 
                 </div>-->
 
-                <button
-                    type="submit"
-                    id="login-button"
-                    class="submit-button"
-                >
-                    Login
-                </button>
+                <button type="submit" id="login-button" class="submit-button"> Login </button>
 
             </form>
 
@@ -99,45 +86,15 @@
 
             <form id="signup-form" class="hidden-form">
 
-                <input
-                    type="text"
-                    id="signup-name"
-                    class="form-input"
-                    placeholder="Full Name"
-                    required
-                >
-
-                <input
-                    type="email"
-                    id="signup-email"
-                    class="form-input"
-                    placeholder="Email Address"
-                    required
-                >
-
-                <input
-                    type="password"
-                    id="signup-password"
-                    class="form-input"
-                    placeholder="Create Password"
-                    required
-                >
-
-                <input
-                    type="password"
-                    id="confirm-password"
-                    class="form-input"
-                    placeholder="Confirm Password"
-                    required
-                >
-
-                <button
-                    type="submit"
-                    id="signup-button"
-                    class="submit-button"
-                >
-                    Create Account
-                </button>
+                <input type="text" id="signup-name" class="form-input" placeholder="Full Name" required>
+                <input  type="email"  id="signup-email"  class="form-input" placeholder="Email Address" required>
+                <input type="password" id="signup-password" class="form-input" placeholder="Create Password" required>
+                <input type="password" id="confirm-password" class="form-input" placeholder="Confirm Password" required>
+                <div id="signup-warning">
+                    <strong>Important:</strong> Please save your email and password.
+                    This version of the app does not yet support password resets or email recovery.
+                </div>
+                <button type="submit" id="signup-button" class="submit-button"> Create Account</button>
 
             </form>
 
