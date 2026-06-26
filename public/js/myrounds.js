@@ -386,11 +386,11 @@ async function saveRoundChanges() {
     }
 
     const validation = validateRoundData(
+        document.getElementById("edit-notes").value.trim(),
         document.getElementById("edit-course").value.trim(),
         document.getElementById("edit-date").value,
         document.getElementById("edit-time").value,
-        document.getElementById("edit-players").value.trim(),
-        document.getElementById("edit-notes").value.trim()
+        document.getElementById("edit-players").value.trim()
     )
 
     if (!validation.valid) {
