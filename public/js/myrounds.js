@@ -473,6 +473,8 @@ function validateRoundData(bio,courseName, roundDate, teeTime, playersNeeded) {
         };
     }
 
+    console.log(playersNeeded)
+
     const playerCount = parseInt(playersNeeded);
     if (isNaN(playerCount) || playerCount < 1 || playerCount > 3) {
         return {
