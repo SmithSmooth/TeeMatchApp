@@ -373,6 +373,7 @@ function editRound(id) {
     document.getElementById("edit-notes").value = round.notes || "";
     document.getElementById("edit-modal").style.display = "flex";
 
+
 }
 
 document.getElementById("save-round-btn").addEventListener("click", saveRoundChanges);
@@ -385,11 +386,11 @@ async function saveRoundChanges() {
     }
 
     const validation = validateRoundData(
-        document.getElementById("edit-course").value,
+        document.getElementById("edit-course").value.trim(),
         document.getElementById("edit-date").value,
         document.getElementById("edit-time").value,
-        document.getElementById("edit-players").value,
-        document.getElementById("edit-notes").value
+        document.getElementById("edit-players").value.trim(),
+        document.getElementById("edit-notes").value.trim()
     )
 
     if (!validation.valid) {
