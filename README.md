@@ -9,6 +9,24 @@ The project was inspired by a common challenge faced by new and developing golfe
 Many golfers, particularly beginners and those new to an area (myself included), struggle to find regular playing partners with similar skill levels. Existing golf platforms primarily focus on booking tee times rather than facilitating community building.
 TeeMatch aims to address this gap by providing a platform that enables golfers to discover, organise, and manage rounds with compatible local players.
 
+---
+## Live Demo
+
+The application is available at:
+**https://teematchapp.onrender.com**
+
+### Demo Account
+
+To explore the application without creating an account, use the following credentials:
+
+Email: [demoTeeMatchApp@gmail.com]
+Password: DemoPassword123
+
+Alternatively, you can register your own account to experience the complete signup and profile creation process.
+
+> **Note:** The application is hosted on Render's free tier. If the application has been inactive, the initial request may take up to a minute while the server starts. Thank you for your patience.
+ 
+---
 
 ## Users can:
 1. Create an account

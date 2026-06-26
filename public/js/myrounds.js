@@ -386,11 +386,11 @@ async function saveRoundChanges() {
     }
 
     const validation = validateRoundData(
+        document.getElementById("edit-notes").value.trim(),
         document.getElementById("edit-course").value.trim(),
         document.getElementById("edit-date").value,
         document.getElementById("edit-time").value,
-        document.getElementById("edit-players").value.trim(),
-        document.getElementById("edit-notes").value.trim()
+        document.getElementById("edit-players").value.trim()
     )
 
     if (!validation.valid) {
@@ -472,6 +472,7 @@ function validateRoundData(bio,courseName, roundDate, teeTime, playersNeeded) {
             message: "Please select a tee time."
         };
     }
+
 
     const playerCount = parseInt(playersNeeded);
     if (isNaN(playerCount) || playerCount < 1 || playerCount > 3) {
