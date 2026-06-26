@@ -12,9 +12,7 @@
     <!-- HEADER -->
 
     <header id="main-header">
-
         <h1 id="app-title">Tee Match</h1>
-
     </header>
 
     
@@ -27,9 +25,7 @@
             Welcome Back, <span id="user-name">Golfer</span>
         </h2>
 
-        <p id="welcome-subtext">
-            Ready to find your next round?
-        </p>
+        <p id="welcome-subtext">Ready to find your next round?</p>
         <button id="logout-btn">Logout</button>
         </div>
 
@@ -38,10 +34,7 @@
     <!-- QUICK ACTIONS -->
 
     <section id="quick-actions">
-
-        <h3 class="section-heading">
-            Quick Actions
-        </h3>
+        <h3 class="section-heading"> Quick Actions</h3>
 
         <div class="action-grid">
 
@@ -53,19 +46,14 @@
 
             </button>
 
-            <button
-                id="create-round-btn"
-                class="action-card">
-                ➕
+            <button id="create-round-btn" class="action-card"> ➕
                 <span>
                     Create Round
                 </span>
 
             </button>
 
-            <button
-                id="my-rounds-btn"
-                class="action-card">
+            <button id="my-rounds-btn" class="action-card">
                 📅
                 <span>
                     My Rounds
@@ -73,12 +61,8 @@
 
             </button>
 
-            <button
-                id="requests-btn"
-                class="action-card">
-
+            <button id="requests-btn" class="action-card">
                 👥
-
                 <span>
                     Requests
                 </span>
@@ -101,51 +85,25 @@
 
             <!-- CONTACT DETAILS -->
 
-            <h4 class="profile-subheading">
-                Contact Details
-            </h4>
+            <h4 class="profile-subheading">Contact Details</h4>
+            <label for="phone-number"> Phone Number</label>
 
-            <label for="phone-number">
-                Phone Number
-            </label>
+            <input type="tel" id="phone-number" class="form-input">
 
-            <input
-                type="tel"
-                id="phone-number"
-                class="form-input">
+            <label for="instagram-handle">Instagram Handle</label>
+            <input type="text" id="instagram-handle" class="form-input">
 
-            <label for="instagram-handle">
-                Instagram Handle
-            </label>
+            <label for="postcode"> Postcode</label>
 
-            <input
-                type="text"
-                id="instagram-handle"
-                class="form-input">
-
-            <label for="postcode">
-                Postcode
-            </label>
-
-            <input
-                type="text"
-                id="postcode"
-                class="form-input">
+            <input type="text" id="postcode" class="form-input">
 
             <!-- GOLF DETAILS -->
 
-            <h4 class="profile-subheading">
-                Golf Information
-            </h4>
+            <h4 class="profile-subheading"> Golf Information</h4>
 
-            <label for="home-course">
-                Home Course
-            </label>
+            <label for="home-course">  Home Course</label>
 
-            <input
-                type="text"
-                id="home-course"
-                class="form-input">
+            <input type="text" id="home-course" class="form-input">
 
             <label for="handicap"> Handicap <em>(Use [ - ] for plus handicaps)</em></label>
             <input type="number" id="handicap" class="form-input" step="0.1">
@@ -163,47 +121,20 @@
                 Availability
             </label>
 
-            <select
-                id="availability"
-                class="form-input">
-
-                <option value="">
-                    Select Availability
-                </option>
-
-                <option value="Weekdays">
-                    Weekdays
-                </option>
-
-                <option value="Weekends">
-                    Weekends
-                </option>
-
-                <option value="Both">
-                    Both
-                </option>
-
+            <select id="availability" class="form-input">
+                <option value=""> Select Availability</option>
+                <option value="Weekdays"> Weekdays</option>
+                <option value="Weekends"> Weekends</option>
+                <option value="Both"> Both</option>
             </select>
 
             <!-- BIO -->
 
-            <h4 class="profile-subheading">
-                About Me
-            </h4>
-
-            <textarea
-                id="bio"
-                class="form-textarea"
-                placeholder="Tell other golfers a little about yourself..."></textarea>
+            <h4 class="profile-subheading">About Me</h4>
+            <textarea id="bio" class="form-textarea" placeholder="Tell other golfers a little about yourself..."></textarea>
 
             <div id="profile-message"></div>
-            <button
-                id="save-profile-btn"
-                class="save-button">
-
-                Save Changes
-
-            </button>
+            <button id="save-profile-btn" class="save-button"> Save Changes</button>
 
         </div>
 
